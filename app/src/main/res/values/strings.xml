@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GroxCounter</string>
+    <string name="simple_activity_name">Simple Activity</string>
+    <string name="persist_activity_name">Persist Activity</string>
+</resources>
