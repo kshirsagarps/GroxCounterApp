@@ -1,0 +1,25 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "origin"]
+	url = git@github.com:kshirsagarps/groxweatherapp.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[user]
+	name = kshirsagarps
+	email = pratyush.kshirsagar@gmail.com
+[branch "add_weather_sample_code"]
+	remote = origin
+	merge = refs/heads/master
+[branch "rename_methods"]
+	remote = origin
+	merge = refs/heads/master
+[branch "yiwu/remove_state"]
+	remote = origin
+	merge = refs/heads/yiwu/remove_state
