@@ -7,6 +7,7 @@ import com.example.groxcounter.grox.IncrementCounterCommand
 import com.example.groxcounter.grox.Store
 import com.groupon.grox.Action
 import com.groupon.grox.RxStores.states
+import com.jakewharton.rxbinding.view.RxView
 import kotlinx.android.synthetic.main.activity_counter.*
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers.mainThread
@@ -25,16 +26,13 @@ class SimpleActivity : AppCompatActivity() {
         subscriptions.add(states(store).observeOn(mainThread())
                 .subscribe({ it -> counterText.text = it.toString() }, this::onError))
 
-        incrementButton.setOnClickListener {
-            subscriptions.add((IncrementCounterCommand().actions() as Observable<Action<Int>>)
-                    .subscribe(store::dispatch, this::onError))
-        }
+        subscriptions.add(RxView.clicks(incrementButton)
+                .flatMap { (IncrementCounterCommand().actions() as Observable<Action<Int>>) }
+                .subscribe(store::dispatch, this::onError))
 
-        decrementButton.setOnClickListener {
-            subscriptions.add((DecrementCounterCommand().actions() as Observable<Action<Int>>)
-                    .subscribe(store::dispatch, this::onError))
-        }
-
+        subscriptions.add(RxView.clicks(decrementButton)
+                .flatMap { (DecrementCounterCommand().actions() as Observable<Action<Int>>) }
+                .subscribe(store::dispatch, this::onError))
     }
 
     override fun onDestroy() {
